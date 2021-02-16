@@ -1,0 +1,11 @@
+#pic2
+{
+    -fx-background-color:red;
+}
+#bottomPane
+{
+    -fx-background-image:url("../img/Background.png");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
