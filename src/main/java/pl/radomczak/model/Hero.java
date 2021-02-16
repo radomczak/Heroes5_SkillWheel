@@ -3,8 +3,7 @@ package pl.radomczak.model;
 import java.util.Objects;
 import java.util.Set;
 
-public class Hero
-{
+public class Hero {
     private String name;
     private Skill uniqueSkill;
     private Set<Skill> startingSkills;

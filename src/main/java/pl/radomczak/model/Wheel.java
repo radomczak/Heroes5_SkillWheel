@@ -1,13 +1,10 @@
 package pl.radomczak.model;
 
-import pl.radomczak.repositories.*;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Wheel
-{
+public class Wheel {
     private final HashSet<Ability> abilities = new HashSet<>();
     private final HashSet<Skill> skills = new HashSet<>();
     private final HashSet<ItemPosition> itemPositions = new HashSet<>();
@@ -26,9 +23,7 @@ public class Wheel
         return skills;
     }
 
-    public HashSet<ItemPosition> getItemPositions() {
-        return itemPositions;
-    }
+    public HashSet<ItemPosition> getItemPositions() { return itemPositions; }
 
     public HashSet<Hero> getHeroes() {
         return heroes;

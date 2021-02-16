@@ -3,16 +3,14 @@ package pl.radomczak.controller.io;
 import pl.radomczak.model.*;
 import pl.radomczak.model.exception.NoSuchRaceException;
 import pl.radomczak.model.exception.SkillNotFoundException;
-import pl.radomczak.repositories.AbilitiesRepository;
-import pl.radomczak.repositories.SkillsRepository;
+import pl.radomczak.repository.AbilitiesRepository;
+import pl.radomczak.repository.SkillsRepository;
 
 import java.util.*;
 import java.util.function.Predicate;
 
-public class ConsoleReader implements Reader
-{
+public class ConsoleReader implements Reader {
     private final Scanner input = new Scanner(System.in);
-
 
     public int readInt() {
         try {
@@ -39,23 +37,20 @@ public class ConsoleReader implements Reader
         input.close();
     }
 
-    public String readSimpleStringField(String initMessage, String errorMessage)
-    {
+    public String readSimpleStringField(String initMessage, String errorMessage) {
         String var = null;
         do {
             System.out.println(initMessage);
             try {
                 var = readString();
-            }catch (InputMismatchException e)
-            {
+            }catch (InputMismatchException e) {
                 System.out.println(errorMessage);
             }
         }while (var == null);
         return var;
     }
 
-    public boolean readSimpleBooleanField(String initMessage, String errorMessage)
-    {
+    public boolean readSimpleBooleanField(String initMessage, String errorMessage) {
         boolean conditionRacial = false;
         boolean bool = false;
         do {
@@ -63,24 +58,21 @@ public class ConsoleReader implements Reader
             try {
                 bool = readBoolean();
                 conditionRacial = true;
-            }catch (InputMismatchException e)
-            {
+            }catch (InputMismatchException e) {
                 System.out.println(errorMessage);
             }
         }while (!conditionRacial);
         return bool;
     }
 
-    public int readConditionIntField(String initMessage, String errorMessage, Predicate<Integer> predicate)
-    {
+    public int readConditionIntField(String initMessage, String errorMessage, Predicate<Integer> predicate) {
         boolean condition = false;
         int intVar = 0;
         do {
             System.out.println(initMessage);
             try {
                 intVar = readInt();
-            }catch (InputMismatchException e)
-            {
+            }catch (InputMismatchException e) {
                 System.out.println(errorMessage);
                 continue;
             }
@@ -93,8 +85,7 @@ public class ConsoleReader implements Reader
         return intVar;
     }
 
-    public Race readRace(String initMessage, String errorMessage)
-    {
+    public Race readRace(String initMessage, String errorMessage) {
         Race race = null;
         do {
             System.out.println(initMessage);
@@ -107,8 +98,7 @@ public class ConsoleReader implements Reader
         } while (race == null);
         return race;
     }
-    public Set<Race> readSetOfRaces(String initMessage)
-    {
+    public Set<Race> readSetOfRaces(String initMessage) {
         Set<Race> races = new HashSet<>();
         boolean conditionRaces = false;
         do {
@@ -116,8 +106,7 @@ public class ConsoleReader implements Reader
             System.out.println("Możliwe rasy:" + Arrays.toString(Race.values()));
             try {
                 String[] stringRaces = readString().replaceAll(" ","").split(",");
-                for (String race : stringRaces)
-                {
+                for (String race : stringRaces) {
                     Race raceToAdd = Race.createOptionFromString(race);
                     races.add(raceToAdd);
                 }
@@ -129,15 +118,13 @@ public class ConsoleReader implements Reader
         return races;
     }
 
-    public Set<Skill> readSetOfSkills(String initMessage, String errorMessage, SkillsRepository skillsRepository)
-    {
+    public Set<Skill> readSetOfSkills(String initMessage, String errorMessage, SkillsRepository skillsRepository) {
         Set<Skill> skills = new HashSet<>();
         boolean conditionSkills = false;
         do {
             System.out.println(initMessage);
             System.out.println("Możliwe zdolności:");
-            for(Skill skill : skillsRepository.getSkills())
-            {
+            for(Skill skill : skillsRepository.getSkills()) {
                 System.out.print(skill + ", ");
             }
 
@@ -158,21 +145,18 @@ public class ConsoleReader implements Reader
         return skills;
     }
 
-    public Set<Ability> readSetOfAbilities(String initMessage, String errorMessage, AbilitiesRepository abilitiesRepository)
-    {
+    public Set<Ability> readSetOfAbilities(String initMessage, String errorMessage, AbilitiesRepository abilitiesRepository) {
         Set<Ability> abilities = new HashSet<>();
         boolean conditionAbilities = false;
         do {
             System.out.println(initMessage);
             System.out.println("Możliwe umiejętności:");
-            for (Ability ability : abilitiesRepository.getAbilities())
-            {
+            for (Ability ability : abilitiesRepository.getAbilities()) {
                 System.out.println(ability + ", ");
             }
             try {
                 String[] stringAbilities = readString().replaceAll(" ","").split(",");
-                for (String ability : stringAbilities)
-                {
+                for (String ability : stringAbilities) {
                     Optional<Ability> opAbility = abilitiesRepository.findByName(ability);
                     if(opAbility.isPresent()) abilities.add(opAbility.get());
                     else throw new SkillNotFoundException("Nie znaleziono umiejetności o nazwie " + ability);
@@ -180,8 +164,7 @@ public class ConsoleReader implements Reader
                 conditionAbilities = true;
             } catch (InputMismatchException e) {
                 System.out.println(errorMessage);
-            } catch (SkillNotFoundException exception)
-            {
+            } catch (SkillNotFoundException exception) {
                 System.out.println(exception.getMessage());
             }
         } while (!conditionAbilities);

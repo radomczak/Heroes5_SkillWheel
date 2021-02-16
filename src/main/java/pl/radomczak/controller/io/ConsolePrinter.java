@@ -2,11 +2,9 @@ package pl.radomczak.controller.io;
 
 import pl.radomczak.model.Option;
 
-public class ConsolePrinter implements Printer
-{
+public class ConsolePrinter implements Printer {
 
-    public <T> void printArray(T[] tArray)
-    {
+    public <T> void printArray(T[] tArray) {
         for (T t : tArray)
         {
             print(t+", ");
@@ -14,10 +12,8 @@ public class ConsolePrinter implements Printer
         System.out.println();
     }
 
-    public void printOptions()
-    {
-        for (Option option : Option.values())
-        {
+    public void printOptions() {
+        for (Option option : Option.values()) {
             System.out.println(option);
         }
     }

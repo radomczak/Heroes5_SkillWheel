@@ -3,15 +3,13 @@ package pl.radomczak.model;
 import java.util.Objects;
 import java.util.Set;
 
-public class Item
-{
+public class Item {
     private String name;
     private String description;
     private String image;
     private Set<Ability> requiredAbilities;
 
-    public Item(String name, String description, String image, Set<Ability> requiredAbilities)
-    {
+    public Item(String name, String description, String image, Set<Ability> requiredAbilities) {
         this.name = name;
         this.description = description;
         this.image = image;

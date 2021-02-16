@@ -3,8 +3,7 @@ package pl.radomczak.model;
 import java.util.Objects;
 import java.util.Set;
 
-public class Skill extends Item
-{
+public class Skill extends Item {
     private Race race;
     private Set<Skill> requiredSkills;
 

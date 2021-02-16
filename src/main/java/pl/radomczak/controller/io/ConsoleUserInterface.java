@@ -100,22 +100,18 @@ public class ConsoleUserInterface implements UserInterface {
         if (races.size()==1)
             isRacial = reader.readSimpleBooleanField("Umiejętność rasowa? (True / False)","Niewłaściwa odpowiedź spróbuj ponownie");
         if (isRacial)
-        {
             racial = reader.readRace("Wybierz rase","Niewłaściwa rasa, spróbuj ponownie");
-        }
 
         boolean needsAbilities = reader.readSimpleBooleanField("Wymaga innych umiejętności? (True / False)","Niewłaściwa odpowiedź, spróbuj ponownie");
         if (needsAbilities)
-        {
             abilities = reader.readSetOfAbilities("Wymagane umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
-        }
+
         ability = new Ability(name,description,image,proficiencyLevel,racial,races,abilities);
         wheelControl.addAbility(ability);
     }
     private void printAbilities() {
         printer.print("Umiejętności:");
-        for (Ability ability : wheelControl.getAbilitiesRepository().getAbilities())
-        {
+        for (Ability ability : wheelControl.getAbilitiesRepository().getAbilities()) {
             printer.print(ability);
         }
     }
@@ -133,11 +129,9 @@ public class ConsoleUserInterface implements UserInterface {
             try {
                 option = Option.createOptionFromInt(reader.readInt());
                 optionOk = true;
-            }catch (InputMismatchException e)
-            {
+            }catch (InputMismatchException e) {
                 printer.print("Wprowadzono wartość, która nie jest liczbą, podaj ponownie");
-            }catch (NoSuchOptionException ex)
-            {
+            }catch (NoSuchOptionException ex) {
                 printer.print(ex.getMessage() + ", wprowadz ponownie");
             }
         }while (!optionOk);

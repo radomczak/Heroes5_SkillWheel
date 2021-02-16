@@ -1,13 +1,11 @@
-package pl.radomczak.repositories;
+package pl.radomczak.repository;
 
 import pl.radomczak.model.Ability;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 
-public class AbilitiesRepository
-{
+public class AbilitiesRepository {
     private final Collection<Ability> abilities;
 
     public AbilitiesRepository(Collection<Ability> abilities) {
@@ -24,10 +22,8 @@ public class AbilitiesRepository
         return abilities;
     }
 
-    public Optional<Ability> findByName(String name)
-    {
-        for (Ability ability : abilities)
-        {
+    public Optional<Ability> findByName(String name) {
+        for (Ability ability : abilities) {
             if (ability.getName().equals(name))
                 return Optional.of(ability);
         }

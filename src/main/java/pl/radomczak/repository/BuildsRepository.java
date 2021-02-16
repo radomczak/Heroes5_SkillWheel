@@ -1,11 +1,10 @@
-package pl.radomczak.repositories;
+package pl.radomczak.repository;
 
 import pl.radomczak.model.Build;
 
 import java.util.Map;
 
-public class BuildsRepository
-{
+public class BuildsRepository {
     private final Map<String, Build> builds;
 
     public BuildsRepository(Map<String, Build> builds) {

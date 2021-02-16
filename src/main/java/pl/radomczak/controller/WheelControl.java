@@ -1,10 +1,9 @@
 package pl.radomczak.controller;
 
 import pl.radomczak.model.*;
-import pl.radomczak.repositories.*;
+import pl.radomczak.repository.*;
 
-public class WheelControl
-{
+public class WheelControl {
     private Wheel wheel;
     private AbilitiesRepository abilitiesRepository;
     private BuildsRepository buildsRepository;
@@ -12,10 +11,8 @@ public class WheelControl
     private PositionRepository positionRepository;
     private SkillsRepository skillsRepository;
 
-    public WheelControl()
-    {
-        if (!importWheel())
-        {
+    public WheelControl() {
+        if (!importWheel()) {
             this.wheel = new Wheel();
             this.abilitiesRepository = new AbilitiesRepository(wheel.getAbilities());
             this.buildsRepository = new BuildsRepository(wheel.getBuilds());

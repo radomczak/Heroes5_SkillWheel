@@ -1,12 +1,11 @@
-package pl.radomczak.repositories;
+package pl.radomczak.repository;
 
 import pl.radomczak.model.Skill;
 
 import java.util.Collection;
 import java.util.Optional;
 
-public class SkillsRepository
-{
+public class SkillsRepository {
     private final Collection<Skill> skills;
 
     public SkillsRepository(Collection<Skill> skills) {
@@ -22,10 +21,8 @@ public class SkillsRepository
         return skills;
     }
 
-    public Optional<Skill> findByName(String name)
-    {
-        for (Skill skill : skills)
-        {
+    public Optional<Skill> findByName(String name) {
+        for (Skill skill : skills) {
             if (skill.getName().equals(name))
                 return Optional.of(skill);
         }

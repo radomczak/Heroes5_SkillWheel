@@ -3,8 +3,7 @@ package pl.radomczak.model;
 import java.util.Objects;
 import java.util.Set;
 
-public class Ability extends Item
-{
+public class Ability extends Item {
     private int proficiencyLevel;
     private Race racial;
     private Set<Race> allowedRaces;
@@ -47,8 +46,7 @@ public class Ability extends Item
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         String isRacial = "";
         if (racial != null)
         {

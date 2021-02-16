@@ -1,5 +1,4 @@
-module Heroes5.SkillWheel
-{
+module Heroes5.SkillWheel {
     requires javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
