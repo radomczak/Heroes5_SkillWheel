@@ -2,7 +2,6 @@ package pl.radomczak.model;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 public class Wheel {
     private final HashSet<Ability> abilities = new HashSet<>();
@@ -12,8 +11,8 @@ public class Wheel {
     private final HashMap<String, Build> builds = new HashMap<>();
 
     private Hero activeHero;
-    private Set<Item> activeItems;
-    private Set<Item> allowedItems;
+    private HashSet<Item> activeItems;
+    private HashSet<Item> allowedItems;
 
     public HashSet<Ability> getAbilities() {
         return abilities;
@@ -41,19 +40,19 @@ public class Wheel {
         this.activeHero = activeHero;
     }
 
-    public Set<Item> getActiveItems() {
+    public HashSet<Item> getActiveItems() {
         return activeItems;
     }
 
-    public void setActiveItems(Set<Item> activeItems) {
+    public void setActiveItems(HashSet<Item> activeItems) {
         this.activeItems = activeItems;
     }
 
-    public Set<Item> getAllowedItems() {
+    public HashSet<Item> getAllowedItems() {
         return allowedItems;
     }
 
-    public void setAllowedItems(Set<Item> allowedItems) {
+    public void setAllowedItems(HashSet<Item> allowedItems) {
         this.allowedItems = allowedItems;
     }
 }

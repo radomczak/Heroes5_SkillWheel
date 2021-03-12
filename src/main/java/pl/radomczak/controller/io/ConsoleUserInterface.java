@@ -76,7 +76,15 @@ public class ConsoleUserInterface implements UserInterface {
             if (needsSkills) {
                 skills = reader.readSetOfSkills("Wymagane zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
             }
-            skill = new Skill(name,description,image,abilities,race,skills); //Skill factory
+
+            skill = Skill.builder()
+                .withName(name)
+                .withDescription(description)
+                .withImage(image)
+                .withRequiredAbilities(abilities)
+                .withRace(race)
+                .withRequiredSkills(skills)
+                .build();
             wheelControl.addSkill(skill);
         }
     }
@@ -106,7 +114,15 @@ public class ConsoleUserInterface implements UserInterface {
         if (needsAbilities)
             abilities = reader.readSetOfAbilities("Wymagane umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
 
-        ability = new Ability(name,description,image,proficiencyLevel,racial,races,abilities);
+        ability = Ability.builder()
+            .withName(name)
+            .withDescription(description)
+            .withImage(image)
+            .withProficiencyLevel(proficiencyLevel)
+            .withAllowedRaces(races)
+            .withRacial(racial)
+            .withRequiredAbilities(abilities)
+            .build();
         wheelControl.addAbility(ability);
     }
     private void printAbilities() {

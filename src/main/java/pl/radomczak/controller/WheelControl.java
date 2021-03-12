@@ -36,10 +36,12 @@ public class WheelControl {
     {
         abilitiesRepository.addAbility(ability);
     }
+
     public void addHero(Hero hero)
     {
         heroesRepository.addHero(hero);
     }
+
     public void addBuild(String name,Build build)
     {
         buildsRepository.addBuild(name,build);

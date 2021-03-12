@@ -70,4 +70,48 @@ public class Hero {
     public int hashCode() {
         return Objects.hash(name, uniqueSkill, startingSkills, startingAbilities, race);
     }
+
+    public static HeroBuilder builder() {
+        return new HeroBuilder();
+    }
+
+    public static final class HeroBuilder {
+        private String name;
+        private Skill uniqueSkill;
+        private Set<Skill> startingSkills;
+        private Set<Ability> startingAbilities;
+        private Race race;
+
+        private HeroBuilder() {
+        }
+
+        public HeroBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public HeroBuilder withUniqueSkill(Skill uniqueSkill) {
+            this.uniqueSkill = uniqueSkill;
+            return this;
+        }
+
+        public HeroBuilder withStartingSkills(Set<Skill> startingSkills) {
+            this.startingSkills = startingSkills;
+            return this;
+        }
+
+        public HeroBuilder withStartingAbilities(Set<Ability> startingAbilities) {
+            this.startingAbilities = startingAbilities;
+            return this;
+        }
+
+        public HeroBuilder withRace(Race race) {
+            this.race = race;
+            return this;
+        }
+
+        public Hero build() {
+            return new Hero(name, uniqueSkill, startingSkills, startingAbilities, race);
+        }
+    }
 }
