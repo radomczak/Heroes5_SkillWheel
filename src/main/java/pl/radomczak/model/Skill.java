@@ -51,6 +51,9 @@ public class Skill extends Item {
                 '}';
     }
 
+    public static SkillBuilder builder() {
+        return new SkillBuilder();
+    }
 
     public static final class SkillBuilder {
         private String name;
@@ -61,10 +64,6 @@ public class Skill extends Item {
         private Set<Skill> requiredSkills;
 
         private SkillBuilder() {
-        }
-
-        public static SkillBuilder aSkill() {
-            return new SkillBuilder();
         }
 
         public SkillBuilder withName(String name) {

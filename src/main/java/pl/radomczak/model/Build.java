@@ -50,4 +50,36 @@ public class Build {
     public int hashCode() {
         return Objects.hash(hero, skills, abilities);
     }
+
+    public static BuildBuilder builder() {
+        return new BuildBuilder();
+    }
+
+    public static final class BuildBuilder {
+        private Hero hero;
+        private Set<Skill> skills;
+        private Set<Ability> abilities;
+
+        private BuildBuilder() {
+        }
+
+        public BuildBuilder withHero(Hero hero) {
+            this.hero = hero;
+            return this;
+        }
+
+        public BuildBuilder withSkills(Set<Skill> skills) {
+            this.skills = skills;
+            return this;
+        }
+
+        public BuildBuilder withAbilities(Set<Ability> abilities) {
+            this.abilities = abilities;
+            return this;
+        }
+
+        public Build build() {
+            return new Build(hero, skills, abilities);
+        }
+    }
 }
