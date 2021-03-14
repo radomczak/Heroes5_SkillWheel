@@ -98,8 +98,9 @@ public class ConsoleReader implements Reader {
         } while (race == null);
         return race;
     }
-    public Set<Race> readSetOfRaces(String initMessage) {
-        Set<Race> races = new HashSet<>();
+    public HashSet<Race> readSetOfRaces(String initMessage) {
+        HashSet<Race> races = new HashSet<>();
+
         boolean conditionRaces = false;
         do {
             System.out.println(initMessage);
@@ -118,8 +119,8 @@ public class ConsoleReader implements Reader {
         return races;
     }
 
-    public Set<Skill> readSetOfSkills(String initMessage, String errorMessage, SkillsRepository skillsRepository) {
-        Set<Skill> skills = new HashSet<>();
+    public HashSet<Skill> readSetOfSkills(String initMessage, String errorMessage, SkillsRepository skillsRepository) {
+        HashSet<Skill> skills = new HashSet<>();
         boolean conditionSkills = false;
         do {
             System.out.println(initMessage);
@@ -145,8 +146,8 @@ public class ConsoleReader implements Reader {
         return skills;
     }
 
-    public Set<Ability> readSetOfAbilities(String initMessage, String errorMessage, AbilitiesRepository abilitiesRepository) {
-        Set<Ability> abilities = new HashSet<>();
+    public HashSet<Ability> readSetOfAbilities(String initMessage, String errorMessage, AbilitiesRepository abilitiesRepository) {
+        HashSet<Ability> abilities = new HashSet<>();
         boolean conditionAbilities = false;
         do {
             System.out.println(initMessage);

@@ -69,13 +69,14 @@ public class ConsoleUserInterface implements UserInterface {
             String description = reader.readSimpleStringField("Opis","Niewłaściwy opis, spróbuj ponownie");
             String image = reader.readSimpleStringField("Scieżka do obrazu","Niewłaściwa sciezka, spróbuj ponownie");
             Race race = reader.readRace("Wybierz rase","Niewłaściwa rasa, spróbuj ponownie");
-            boolean needsSkills = reader.readSimpleBooleanField("Czy wymaga innych zdolności? (True / False)","Niewłaściwa odpowiedź spróbuj ponownie");
             Set<Skill> skills = null;
-            Set<Ability> abilities = reader.readSetOfAbilities("Wymagane umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
 
+            boolean needsSkills = reader.readSimpleBooleanField("Czy wymaga innych zdolności? (True / False)","Niewłaściwa odpowiedź spróbuj ponownie");
             if (needsSkills) {
                 skills = reader.readSetOfSkills("Wymagane zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
             }
+
+            Set<Ability> abilities = reader.readSetOfAbilities("Wymagane umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
 
             skill = Skill.builder()
                 .withName(name)
@@ -101,14 +102,11 @@ public class ConsoleUserInterface implements UserInterface {
         String image = reader.readSimpleStringField("Scieżka do obrazu","Niewłaściwa sciezka, spróbuj ponownie");
         int proficiencyLevel = reader.readConditionIntField("Poziom mistrzostwa (1 - 4)","Niewłaściwy poziom mistrzostwa, spróbuj ponownie",x -> x <= 4 && x >= 1);
         Set<Race> races = reader.readSetOfRaces("Dla jakich ras jest dostepna? (Format: rasa1,rasa2,rasa3 itp.)");
-        boolean isRacial = false;
-        Race racial = null;
+        boolean racial = false;
         Set<Ability> abilities = null;
 
         if (races.size()==1)
-            isRacial = reader.readSimpleBooleanField("Umiejętność rasowa? (True / False)","Niewłaściwa odpowiedź spróbuj ponownie");
-        if (isRacial)
-            racial = reader.readRace("Wybierz rase","Niewłaściwa rasa, spróbuj ponownie");
+            racial = reader.readSimpleBooleanField("Umiejętność rasowa? (True / False)","Niewłaściwa odpowiedź spróbuj ponownie");
 
         boolean needsAbilities = reader.readSimpleBooleanField("Wymaga innych umiejętności? (True / False)","Niewłaściwa odpowiedź, spróbuj ponownie");
         if (needsAbilities)

@@ -5,10 +5,10 @@ import java.util.Set;
 
 public class Ability extends Item {
     private int proficiencyLevel;
-    private Race racial;
-    private Set<Race> allowedRaces;
+    private boolean racial;
+    private final Set<Race> allowedRaces;
 
-    public Ability(String name, String description, String image, int proficiencyLevel, Race racial,Set<Race> allowedRaces ,Set<Ability> requiredAbilities) {
+    public Ability(String name, String description, String image, int proficiencyLevel, boolean racial,Set<Race> allowedRaces ,Set<Ability> requiredAbilities) {
         super(name, description, image, requiredAbilities); //requiredAbilities only for advanced abilities that require basic ones.
         this.proficiencyLevel = proficiencyLevel;
         this.racial = racial;
@@ -23,11 +23,11 @@ public class Ability extends Item {
         this.proficiencyLevel = proficiencyLevel;
     }
 
-    public Race getRacial() {
+    public boolean getRacial() {
         return racial;
     }
 
-    public void setRacial(Race racial) {
+    public void setRacial(boolean racial) {
         this.racial = racial;
     }
 
@@ -37,20 +37,20 @@ public class Ability extends Item {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Ability ability = (Ability) o;
-        return proficiencyLevel == ability.proficiencyLevel;
+        return proficiencyLevel == ability.proficiencyLevel && racial == ability.racial && allowedRaces.equals(ability.allowedRaces);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), proficiencyLevel);
+        return Objects.hash(super.hashCode(), proficiencyLevel, racial, allowedRaces);
     }
 
     @Override
     public String toString() {
         String isRacial = "";
-        if (racial != null)
+        if (racial)
         {
-            isRacial += ("| " + racial);
+            isRacial += ("| " + allowedRaces);
         }
         return "Umiejętność " + getName() +  "| Ścieżka do obrazu - '" + getImage() + "'| Poziom mistrzostwa = " + proficiencyLevel + isRacial + "\n" + getDescription() +"\n";
     }
@@ -61,7 +61,7 @@ public class Ability extends Item {
 
     public static final class AbilityBuilder {
         private int proficiencyLevel;
-        private Race racial;
+        private boolean racial;
         private Set<Race> allowedRaces;
         private String name;
         private String description;
@@ -76,7 +76,7 @@ public class Ability extends Item {
             return this;
         }
 
-        public AbilityBuilder withRacial(Race racial) {
+        public AbilityBuilder withRacial(boolean racial) {
             this.racial = racial;
             return this;
         }
