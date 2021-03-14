@@ -1,10 +1,7 @@
 package pl.radomczak.controller.io;
 
 import pl.radomczak.controller.WheelControl;
-import pl.radomczak.model.Ability;
-import pl.radomczak.model.Option;
-import pl.radomczak.model.Race;
-import pl.radomczak.model.Skill;
+import pl.radomczak.model.*;
 import pl.radomczak.model.exception.NoSuchOptionException;
 
 import java.util.InputMismatchException;
@@ -130,10 +127,27 @@ public class ConsoleUserInterface implements UserInterface {
         }
     }
     private void addHero() {
+        Hero hero;
+        String name = reader.readSimpleStringField("Nazwa","Niewłaściwa nazwa, spróbuj ponownie");
+        Skill uniqueSkill = reader.readSkill("Zdolność specjalna","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
+        Set<Skill> startingSkills = reader.readSetOfSkills("Początkowe zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
+        Set<Ability> startingAbilities = reader.readSetOfAbilities("Początkowe umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
+        Race race = reader.readRace("Wybierz rase","Niewłaściwa rasa, spróbuj ponownie");
 
+        hero = Hero.builder()
+                .withName(name)
+                .withUniqueSkill(uniqueSkill)
+                .withStartingSkills(startingSkills)
+                .withStartingAbilities(startingAbilities)
+                .withRace(race)
+                .build();
+        wheelControl.addHero(hero);
     }
     private void printHeroes() {
-
+        printer.print("Bohaterzy:");
+        for (Hero hero : wheelControl.getHeroesRepository().getHeroes()) {
+            printer.print(hero);
+        }
     }
 
     private Option getOption() {

@@ -15,4 +15,8 @@ public class HeroesRepository {
     {
         heroes.add(hero);
     }
+
+    public Collection<Hero> getHeroes() {
+        return heroes;
+    }
 }

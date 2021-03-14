@@ -98,6 +98,32 @@ public class ConsoleReader implements Reader {
         } while (race == null);
         return race;
     }
+
+    public Skill readSkill(String initMessage, String errorMessage,SkillsRepository skillsRepository)
+    {
+        String skillName = "";
+        Skill skill = null;
+        do {
+            System.out.println(initMessage);
+            System.out.println("Możliwe zdolności:");
+            for (Skill s : skillsRepository.getSkills())
+            {
+                System.out.print(s.getName() + ", ");
+            }
+            try {
+                skillName = readString();
+                Optional<Skill> optionalSkill = skillsRepository.findByName(skillName);
+                if (optionalSkill.isPresent()) skill = optionalSkill.get();
+                else throw new SkillNotFoundException("Nie znaleziono zdolności o nazwie " + skillName);
+            } catch (InputMismatchException exception) {
+                System.out.println(errorMessage);
+            } catch (SkillNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (skill == null);
+        return skill;
+    }
+
     public HashSet<Race> readSetOfRaces(String initMessage) {
         HashSet<Race> races = new HashSet<>();
 
@@ -126,7 +152,7 @@ public class ConsoleReader implements Reader {
             System.out.println(initMessage);
             System.out.println("Możliwe zdolności:");
             for(Skill skill : skillsRepository.getSkills()) {
-                System.out.print(skill + ", ");
+                System.out.print(skill.getName() + ", ");
             }
 
             try {
@@ -153,7 +179,7 @@ public class ConsoleReader implements Reader {
             System.out.println(initMessage);
             System.out.println("Możliwe umiejętności:");
             for (Ability ability : abilitiesRepository.getAbilities()) {
-                System.out.println(ability + ", ");
+                System.out.println(ability.getName() + ", ");
             }
             try {
                 String[] stringAbilities = readString().replaceAll(" ","").split(",");
