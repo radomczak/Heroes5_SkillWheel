@@ -3,7 +3,6 @@ package pl.radomczak.controller.io;
 import pl.radomczak.controller.WheelControl;
 import pl.radomczak.model.*;
 import pl.radomczak.model.exception.NoSuchOptionException;
-import pl.radomczak.repository.HeroesRepository;
 
 import java.util.InputMismatchException;
 import java.util.Set;
@@ -165,10 +164,19 @@ public class ConsoleUserInterface implements UserInterface {
     }
 
     private void addBuild() {
+        Build build;
+        String name = reader.readSimpleStringField("Nazwa","Niewłaściwa nazwa, spróbuj ponownie");
         Hero hero = reader.readHero("Bohater","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getHeroesRepository());
-        Set<Skill> startingSkills = reader.readSetOfSkills("Zestaw zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
-        Set<Ability> startingAbilities = reader.readSetOfAbilities("Zestaw umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
-        
+        Set<Skill> skillSet = reader.readSetOfSkills("Zestaw zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
+        Set<Ability> abilitySet = reader.readSetOfAbilities("Zestaw umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
+
+        build = Build.builder()
+                .withHero(hero)
+                .withSkills(skillSet)
+                .withAbilities(abilitySet)
+                .build();
+
+        wheelControl.addBuild(name,build);
     }
 
     private void printBuilds() {
