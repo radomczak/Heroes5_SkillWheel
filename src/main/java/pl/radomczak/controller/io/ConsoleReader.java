@@ -110,6 +110,7 @@ public class ConsoleReader implements Reader {
             {
                 System.out.print(s.getName() + ", ");
             }
+            System.out.println();
             try {
                 skillName = readString();
                 Optional<Skill> optionalSkill = skillsRepository.findByName(skillName);
@@ -132,7 +133,7 @@ public class ConsoleReader implements Reader {
             System.out.println(initMessage);
             System.out.println("Możliwe rasy:" + Arrays.toString(Race.values()));
             try {
-                String[] stringRaces = readString().replaceAll(" ","").split(",");
+                String[] stringRaces = readString().split(",");
                 for (String race : stringRaces) {
                     Race raceToAdd = Race.createOptionFromString(race);
                     races.add(raceToAdd);
@@ -154,9 +155,9 @@ public class ConsoleReader implements Reader {
             for(Skill skill : skillsRepository.getSkills()) {
                 System.out.print(skill.getName() + ", ");
             }
-
+            System.out.println();
             try {
-                String[] stringSkills = readString().replaceAll(" ", "").split(",");
+                String[] stringSkills = readString().split(",");
                 for (String skill : stringSkills) {
                     Optional<Skill> opSkill = skillsRepository.findByName(skill);
                     if (opSkill.isPresent()) skills.add(opSkill.get());
@@ -179,10 +180,11 @@ public class ConsoleReader implements Reader {
             System.out.println(initMessage);
             System.out.println("Możliwe umiejętności:");
             for (Ability ability : abilitiesRepository.getAbilities()) {
-                System.out.println(ability.getName() + ", ");
+                System.out.print(ability.getName() + ", ");
             }
+            System.out.println();
             try {
-                String[] stringAbilities = readString().replaceAll(" ","").split(",");
+                String[] stringAbilities = readString().split(",");
                 for (String ability : stringAbilities) {
                     Optional<Ability> opAbility = abilitiesRepository.findByName(ability);
                     if(opAbility.isPresent()) abilities.add(opAbility.get());

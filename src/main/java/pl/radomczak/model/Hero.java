@@ -71,6 +71,17 @@ public class Hero {
         return Objects.hash(name, uniqueSkill, startingSkills, startingAbilities, race);
     }
 
+    @Override
+    public String toString() {
+        return "Hero{" +
+                "name='" + name + '\'' +
+                ", uniqueSkill=" + uniqueSkill +
+                ", startingSkills=" + startingSkills +
+                ", startingAbilities=" + startingAbilities +
+                ", race=" + race +
+                '}';
+    }
+
     public static HeroBuilder builder() {
         return new HeroBuilder();
     }
