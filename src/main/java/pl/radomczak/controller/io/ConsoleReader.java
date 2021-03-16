@@ -4,6 +4,7 @@ import pl.radomczak.model.*;
 import pl.radomczak.model.exception.NoSuchRaceException;
 import pl.radomczak.model.exception.SkillNotFoundException;
 import pl.radomczak.repository.AbilitiesRepository;
+import pl.radomczak.repository.HeroesRepository;
 import pl.radomczak.repository.SkillsRepository;
 
 import java.util.*;
@@ -123,6 +124,32 @@ public class ConsoleReader implements Reader {
             }
         } while (skill == null);
         return skill;
+    }
+
+    public Hero readHero(String initMessage, String errorMessage, HeroesRepository heroesRepository)
+    {
+        String heroName = "";
+        Hero hero = null;
+        do {
+            System.out.println(initMessage);
+            System.out.println("Możliwi bohaterowie:");
+            for (Hero h : heroesRepository.getHeroes())
+            {
+                System.out.print(h.getName() + ", ");
+            }
+            System.out.println();
+            try {
+                heroName = readString();
+                Optional<Hero> optionalHero = heroesRepository.findByName(heroName);
+                if (optionalHero.isPresent()) hero = optionalHero.get();
+                else throw new SkillNotFoundException("Nie znaleziono bohatera o nazwie " + heroName);
+            } catch (InputMismatchException exception) {
+                System.out.println(errorMessage);
+            } catch (SkillNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (hero == null);
+        return hero;
     }
 
     public HashSet<Race> readSetOfRaces(String initMessage) {

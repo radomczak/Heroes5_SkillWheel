@@ -1,8 +1,10 @@
 package pl.radomczak.repository;
 
 import pl.radomczak.model.Build;
+import pl.radomczak.model.Hero;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class BuildsRepository {
     private final Map<String, Build> builds;
@@ -18,5 +20,9 @@ public class BuildsRepository {
     public void removeBuild(String name)
     {
         builds.remove(name);
+    }
+
+    public Map<String, Build> getBuilds() {
+        return builds;
     }
 }

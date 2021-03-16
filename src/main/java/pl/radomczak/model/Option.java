@@ -9,7 +9,10 @@ public enum Option {
     ADDABILITY(3,"Dodaj umiejętność"),
     PRINTABILITIES(4,"Wyświetl umiejętności"),
     ADDHERO(5,"Dodaj bohatera"),
-    PRINTHEROES(6,"Wyświetl bohaterów");
+    PRINTHEROES(6,"Wyświetl bohaterów"),
+    ADDBUILD(7,"Dodaj build"),
+    PRINTBUILDS(8,"Wyświetl buildy");
+
 
     private final int value;
     private final String desc;

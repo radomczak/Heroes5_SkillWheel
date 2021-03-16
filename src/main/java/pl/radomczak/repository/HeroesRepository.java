@@ -1,8 +1,10 @@
 package pl.radomczak.repository;
 
 import pl.radomczak.model.Hero;
+import pl.radomczak.model.Skill;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class HeroesRepository {
     private final Collection<Hero> heroes;
@@ -18,5 +20,13 @@ public class HeroesRepository {
 
     public Collection<Hero> getHeroes() {
         return heroes;
+    }
+
+    public Optional<Hero> findByName(String name) {
+        for (Hero hero : heroes) {
+            if (hero.getName().equals(name))
+                return Optional.of(hero);
+        }
+        return Optional.empty();
     }
 }

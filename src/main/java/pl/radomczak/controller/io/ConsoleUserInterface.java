@@ -3,6 +3,7 @@ package pl.radomczak.controller.io;
 import pl.radomczak.controller.WheelControl;
 import pl.radomczak.model.*;
 import pl.radomczak.model.exception.NoSuchOptionException;
+import pl.radomczak.repository.HeroesRepository;
 
 import java.util.InputMismatchException;
 import java.util.Set;
@@ -53,6 +54,14 @@ public class ConsoleUserInterface implements UserInterface {
                     printHeroes();
                     break;
                 }
+                case ADDBUILD: {
+                    addBuild();
+                    break;
+                }
+                case PRINTBUILDS: {
+                    printBuilds();
+                    break;
+                }
             }
         }while(option != Option.EXIT);
     }
@@ -86,12 +95,14 @@ public class ConsoleUserInterface implements UserInterface {
             wheelControl.addSkill(skill);
         }
     }
+
     private void printSkills() {
         printer.print("Zdolności:");
         for (Skill skill : wheelControl.getSkillsRepository().getSkills()) {
             printer.print(skill);
         }
     }
+
     private void addAbility() {
         Ability ability;
         String name = reader.readSimpleStringField("Nazwa","Niewłaściwa nazwa, spróbuj ponownie");
@@ -120,12 +131,14 @@ public class ConsoleUserInterface implements UserInterface {
             .build();
         wheelControl.addAbility(ability);
     }
+
     private void printAbilities() {
         printer.print("Umiejętności:");
         for (Ability ability : wheelControl.getAbilitiesRepository().getAbilities()) {
             printer.print(ability);
         }
     }
+
     private void addHero() {
         Hero hero;
         String name = reader.readSimpleStringField("Nazwa","Niewłaściwa nazwa, spróbuj ponownie");
@@ -143,10 +156,25 @@ public class ConsoleUserInterface implements UserInterface {
                 .build();
         wheelControl.addHero(hero);
     }
+
     private void printHeroes() {
         printer.print("Bohaterzy:");
         for (Hero hero : wheelControl.getHeroesRepository().getHeroes()) {
             printer.print(hero);
+        }
+    }
+
+    private void addBuild() {
+        Hero hero = reader.readHero("Bohater","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getHeroesRepository());
+        Set<Skill> startingSkills = reader.readSetOfSkills("Zestaw zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
+        Set<Ability> startingAbilities = reader.readSetOfAbilities("Zestaw umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
+        
+    }
+
+    private void printBuilds() {
+        printer.print("Buildy:");
+        for (String build : wheelControl.getBuildsRepository().getBuilds().keySet()) {
+            printer.print(build);
         }
     }
 
