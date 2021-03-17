@@ -23,12 +23,16 @@ public class Ability extends Item {
         this.proficiencyLevel = proficiencyLevel;
     }
 
-    public boolean getRacial() {
+    public boolean isRacial() {
         return racial;
     }
 
     public void setRacial(boolean racial) {
         this.racial = racial;
+    }
+
+    public Set<Race> getAllowedRaces() {
+        return allowedRaces;
     }
 
     @Override

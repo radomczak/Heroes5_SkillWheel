@@ -22,8 +22,7 @@ public class WheelControlTest
     }
 
     @Test
-    public void testConstructor()
-    {
+    public void testConstructor() {
         WheelControl w = new WheelControl();
         assertNotNull(w.getAbilitiesRepository());
         assertNotNull(w.getBuildsRepository());

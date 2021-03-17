@@ -11,7 +11,12 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class ConsoleReader implements Reader {
-    private final Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
+
+    public void changeInputStreamToString(String stream){
+        input.close();
+        input = new Scanner(stream);
+    }
 
     public int readInt() {
         try {

@@ -202,6 +202,10 @@ public class ConsoleUserInterface implements UserInterface {
         return option;
     }
 
+    public void changeReaderInputToString(String stream){
+        reader.changeInputStreamToString(stream);
+    }
+
     @Override
     public void close() {
         reader.close();
