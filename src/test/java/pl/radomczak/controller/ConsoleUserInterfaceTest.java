@@ -2,18 +2,15 @@ package pl.radomczak.controller;
 
 import org.junit.*;
 import pl.radomczak.controller.io.ConsoleUserInterface;
-import pl.radomczak.model.Ability;
-import pl.radomczak.model.Hero;
-import pl.radomczak.model.Race;
-import pl.radomczak.model.Skill;
+import pl.radomczak.model.*;
 
 
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
-public class ConsoleUserInterfaceTest
-{
+public class ConsoleUserInterfaceTest {
+
     private ConsoleUserInterface userInterface;
 
     @BeforeClass
@@ -88,7 +85,6 @@ public class ConsoleUserInterfaceTest
         } else {
             fail();
         }
-
     }
 
     @Test
@@ -156,7 +152,7 @@ public class ConsoleUserInterfaceTest
     }
 
     @Test
-    public void handleHeroTest(){
+    public void handleAddHeroTest() {
         WheelControl wheelControl = new WheelControl();
         userInterface.applyFor(wheelControl);
 
@@ -228,6 +224,93 @@ public class ConsoleUserInterfaceTest
         } else {
             fail();
         }
+    }
 
+    @Test
+    public void handleAddBuildTest() {
+        WheelControl wheelControl = new WheelControl();
+        userInterface.applyFor(wheelControl);
+
+        StringBuilder sb = new StringBuilder("");
+        //Ability
+        sb.append(3);
+        sb.append((char)13);
+        sb.append("NazwaA");
+        sb.append((char)13);
+        sb.append("Description");
+        sb.append((char)13);
+        sb.append("Image");
+        sb.append((char)13);
+        sb.append(3);
+        sb.append((char)13);
+        sb.append("RYCERZ,NEKROMANTA");
+        sb.append((char)13);
+        sb.append("False");
+        sb.append((char)13);
+        //Skill
+        sb.append(1);
+        sb.append((char)13);
+        sb.append("NazwaS");
+        sb.append((char)13);
+        sb.append("Description");
+        sb.append((char)13);
+        sb.append("Image");
+        sb.append((char)13);
+        sb.append("RYCERZ");
+        sb.append((char)13);
+        sb.append("False");
+        sb.append((char)13);
+        sb.append("NazwaA");
+        sb.append((char)13);
+        //Hero
+        sb.append(5);
+        sb.append((char)13);
+        sb.append("ImieH");
+        sb.append((char)13);
+        sb.append("NazwaS");
+        sb.append((char)13);
+        sb.append("NazwaS");
+        sb.append((char)13);
+        sb.append("NazwaA");
+        sb.append((char)13);
+        sb.append("RYCERZ");
+        sb.append((char)13);
+        //Build
+        sb.append(7);
+        sb.append((char)13);
+        sb.append("NazwaB");
+        sb.append((char)13);
+        sb.append("ImieH");
+        sb.append((char)13);
+        sb.append("NazwaS");
+        sb.append((char)13);
+        sb.append("NazwaA");
+        sb.append((char)13);
+        //Exit
+        sb.append(0);
+        sb.append((char)13);
+
+        String consoleInput = sb.toString();
+
+        userInterface.changeReaderInputToString(consoleInput);
+        userInterface.handle();
+
+        Optional<Skill> skill = wheelControl.getSkillsRepository().findByName("NazwaS");
+        Optional<Ability> ability = wheelControl.getAbilitiesRepository().findByName("NazwaA");
+        Optional<Hero> hero = wheelControl.getHeroesRepository().findByName("ImieH");
+        Optional<Build> build = wheelControl.getBuildsRepository().findByName("NazwaB");
+
+        if (skill.isPresent() && ability.isPresent() && hero.isPresent() && build.isPresent()) {
+            Skill s = skill.get();
+            Ability a = ability.get();
+            Hero h = hero.get();
+            Build b = build.get();
+
+            assertEquals(b.getHero(),h);
+            assertTrue(b.getAbilities().contains(a));
+            assertTrue(b.getSkills().contains(s));
+        } else {
+            fail();
+        }
     }
 }

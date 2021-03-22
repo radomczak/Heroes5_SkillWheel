@@ -1,7 +1,6 @@
 package pl.radomczak.repository;
 
 import pl.radomczak.model.Build;
-import pl.radomczak.model.Hero;
 
 import java.util.Map;
 import java.util.Optional;
@@ -24,5 +23,11 @@ public class BuildsRepository {
 
     public Map<String, Build> getBuilds() {
         return builds;
+    }
+
+    public Optional<Build> findByName(String name) {
+        if (builds.containsKey(name))
+            return Optional.of(builds.get(name));
+        return Optional.empty();
     }
 }
