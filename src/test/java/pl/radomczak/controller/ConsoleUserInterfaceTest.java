@@ -46,25 +46,25 @@ public class ConsoleUserInterfaceTest {
 
         StringBuilder sb = new StringBuilder("");
         sb.append(3);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Description");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Image");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append(3);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ,NEKROMANTA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("False");
-        sb.append((char)13);
+        sb.append("\r");
         //Print
         sb.append(4);
-        sb.append((char)13);
+        sb.append("\r");
         //Exit
         sb.append(0);
-        sb.append((char)13);
+        sb.append("\r");
 
         String consoleInput = sb.toString();
 
@@ -95,40 +95,40 @@ public class ConsoleUserInterfaceTest {
         StringBuilder sb = new StringBuilder("");
         //Ability
         sb.append(3);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Description");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Image");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append(3);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ,NEKROMANTA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("False");
-        sb.append((char)13);
+        sb.append("\r");
         //Skill
         sb.append(1);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaS");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Description");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Image");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("False");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         //Print
         sb.append(2);
-        sb.append((char)13);
+        sb.append("\r");
         //Exit
         sb.append(0);
-        sb.append((char)13);
+        sb.append("\r");
 
         String consoleInput = sb.toString();
 
@@ -159,50 +159,50 @@ public class ConsoleUserInterfaceTest {
         StringBuilder sb = new StringBuilder("");
         //Ability
         sb.append(3);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Description");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Image");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append(3);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ,NEKROMANTA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("False");
-        sb.append((char)13);
+        sb.append("\r");
         //Skill
         sb.append(1);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaS");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Description");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Image");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("False");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         //Hero
         sb.append(5);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("ImieH");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaS");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaS");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ");
-        sb.append((char)13);
+        sb.append("\r");
         //Exit
         sb.append(0);
-        sb.append((char)13);
+        sb.append("\r");
 
         String consoleInput = sb.toString();
 
@@ -234,61 +234,61 @@ public class ConsoleUserInterfaceTest {
         StringBuilder sb = new StringBuilder("");
         //Ability
         sb.append(3);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Description");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Image");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append(3);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ,NEKROMANTA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("False");
-        sb.append((char)13);
+        sb.append("\r");
         //Skill
         sb.append(1);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaS");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Description");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("Image");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("False");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         //Hero
         sb.append(5);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("ImieH");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaS");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaS");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("RYCERZ");
-        sb.append((char)13);
+        sb.append("\r");
         //Build
         sb.append(7);
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaB");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("ImieH");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaS");
-        sb.append((char)13);
+        sb.append("\r");
         sb.append("NazwaA");
-        sb.append((char)13);
+        sb.append("\r");
         //Exit
         sb.append(0);
-        sb.append((char)13);
+        sb.append("\r");
 
         String consoleInput = sb.toString();
 
