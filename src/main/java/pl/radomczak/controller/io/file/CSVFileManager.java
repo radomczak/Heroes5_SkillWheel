@@ -82,6 +82,43 @@ public class CSVFileManager implements FileManager {
         return skill;
     }
 
+    private void importAbilities(Wheel wheel) {
+        String FILE_NAME = "Abilities.csv";
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(this::createAbilityFromString)
+                    .forEach(abilitiesRepository::addAbility);
+        } catch (FileNotFoundException e) {
+            throw new DataImportException("Brak pliku " + FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Błąd odczytu pliku " + FILE_NAME);
+        }
+    }
+
+    private Ability createAbilityFromString(String csvText) {
+        String[] data = csvText.split(";");
+        Ability ability;
+
+        String name = data[0];
+        String description = data[1];
+        String image = data[2];
+        int proficiencyLevel = Integer.parseInt(data[3]);
+        boolean racial = Boolean.parseBoolean(data[4]);
+        HashSet<Race> races = getRacesFromString(data[5]);
+        HashSet<Ability> abilities = getAbilitiesFromString(data[6]);
+
+        ability = Ability.builder()
+                .withName(name)
+                .withDescription(description)
+                .withImage(image)
+                .withProficiencyLevel(proficiencyLevel)
+                .withAllowedRaces(races)
+                .withRacial(racial)
+                .withRequiredAbilities(abilities)
+                .build();
+        return ability;
+    }
+
     private HashSet<Ability> getAbilitiesFromString(String abilitiesString) {
         if (abilitiesString.equals(""))
             return null;
@@ -109,6 +146,25 @@ public class CSVFileManager implements FileManager {
                 skill.ifPresent(skills::add);
             }
             return skills;
+        }
+    }
+
+    private HashSet<Race> getRacesFromString(String raceString) {
+        if (raceString.equals(""))
+            return null;
+        else {
+            String[] data = raceString.split(",");
+            HashSet<Race> races = new HashSet<>();
+            Race race;
+            for (String s : data) {
+                try {
+                    race = Race.createOptionFromString(s);
+                    races.add(race);
+                } catch (NoSuchRaceException ex) {
+                    throw new DataImportException(ex.getMessage());
+                }
+            }
+            return races;
         }
     }
 
