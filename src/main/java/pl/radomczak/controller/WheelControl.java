@@ -15,26 +15,25 @@ public class WheelControl {
     private final SkillsRepository skillsRepository;
 
     public WheelControl() {
-        if (!importWheel()) {
-            this.wheel = new Wheel();
-        }
-            this.abilitiesRepository = new AbilitiesRepository(wheel.getAbilities());
-            this.buildsRepository = new BuildsRepository(wheel.getBuilds());
-            this.heroesRepository = new HeroesRepository(wheel.getHeroes());
-            this.positionRepository = new PositionRepository(wheel.getItemPositions());
-            this.skillsRepository = new SkillsRepository(wheel.getSkills());
+        importWheel();
+        this.abilitiesRepository = new AbilitiesRepository(wheel.getAbilities());
+        this.buildsRepository = new BuildsRepository(wheel.getBuilds());
+        this.heroesRepository = new HeroesRepository(wheel.getHeroes());
+        this.positionRepository = new PositionRepository(wheel.getItemPositions());
+        this.skillsRepository = new SkillsRepository(wheel.getSkills());
     }
 
-    private boolean importWheel() {
+    private void importWheel() {
         FileManager fileManager = new CSVFileManager();
+        Wheel wheel;
         try {
             wheel =  fileManager.importWheel();
-            return true;
         } catch (DataImportException e) {
             System.out.println(e.getMessage());
             System.out.println("Inicjuje nowa baze");
+            wheel = new Wheel();
         }
-        return false;
+        this.wheel = wheel;
     }
 
     public void addSkill(Skill skill) {

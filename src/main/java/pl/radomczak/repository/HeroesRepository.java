@@ -1,7 +1,6 @@
 package pl.radomczak.repository;
 
 import pl.radomczak.model.Hero;
-import pl.radomczak.model.Skill;
 
 import java.util.Collection;
 import java.util.Optional;
