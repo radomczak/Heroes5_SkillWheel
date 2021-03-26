@@ -5,7 +5,7 @@ import pl.radomczak.model.*;
 import pl.radomczak.model.exception.NoSuchOptionException;
 
 import java.util.InputMismatchException;
-import java.util.Set;
+import java.util.HashSet;
 
 public class ConsoleUserInterface implements UserInterface {
     private WheelControl wheelControl;
@@ -74,14 +74,14 @@ public class ConsoleUserInterface implements UserInterface {
             String description = reader.readSimpleStringField("Opis","Niewłaściwy opis, spróbuj ponownie");
             String image = reader.readSimpleStringField("Scieżka do obrazu","Niewłaściwa sciezka, spróbuj ponownie");
             Race race = reader.readRace("Wybierz rase","Niewłaściwa rasa, spróbuj ponownie");
-            Set<Skill> skills = null;
+            HashSet<Skill> skills = null;
 
             boolean needsSkills = reader.readSimpleBooleanField("Czy wymaga innych zdolności? (True / False)","Niewłaściwa odpowiedź spróbuj ponownie");
             if (needsSkills) {
                 skills = reader.readSetOfSkills("Wymagane zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
             }
 
-            Set<Ability> abilities = reader.readSetOfAbilities("Wymagane umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
+            HashSet<Ability> abilities = reader.readSetOfAbilities("Wymagane umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
 
             skill = Skill.builder()
                 .withName(name)
@@ -108,9 +108,9 @@ public class ConsoleUserInterface implements UserInterface {
         String description = reader.readSimpleStringField("Opis","Niewłaściwy opis, spróbuj ponownie");
         String image = reader.readSimpleStringField("Scieżka do obrazu","Niewłaściwa sciezka, spróbuj ponownie");
         int proficiencyLevel = reader.readConditionIntField("Poziom mistrzostwa (1 - 4)","Niewłaściwy poziom mistrzostwa, spróbuj ponownie",x -> x <= 4 && x >= 1);
-        Set<Race> races = reader.readSetOfRaces("Dla jakich ras jest dostepna? (Format: rasa1,rasa2,rasa3 itp.)");
+        HashSet<Race> races = reader.readSetOfRaces("Dla jakich ras jest dostepna? (Format: rasa1,rasa2,rasa3 itp.)");
         boolean racial = false;
-        Set<Ability> abilities = null;
+        HashSet<Ability> abilities = null;
 
         if (races.size()==1)
             racial = reader.readSimpleBooleanField("Umiejętność rasowa? (True / False)","Niewłaściwa odpowiedź spróbuj ponownie");
@@ -142,8 +142,8 @@ public class ConsoleUserInterface implements UserInterface {
         Hero hero;
         String name = reader.readSimpleStringField("Nazwa","Niewłaściwa nazwa, spróbuj ponownie");
         Skill uniqueSkill = reader.readSkill("Zdolność specjalna","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
-        Set<Skill> startingSkills = reader.readSetOfSkills("Początkowe zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
-        Set<Ability> startingAbilities = reader.readSetOfAbilities("Początkowe umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
+        HashSet<Skill> startingSkills = reader.readSetOfSkills("Początkowe zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
+        HashSet<Ability> startingAbilities = reader.readSetOfAbilities("Początkowe umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
         Race race = reader.readRace("Wybierz rase","Niewłaściwa rasa, spróbuj ponownie");
 
         hero = Hero.builder()
@@ -167,8 +167,8 @@ public class ConsoleUserInterface implements UserInterface {
         Build build;
         String name = reader.readSimpleStringField("Nazwa","Niewłaściwa nazwa, spróbuj ponownie");
         Hero hero = reader.readHero("Bohater","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getHeroesRepository());
-        Set<Skill> skillSet = reader.readSetOfSkills("Zestaw zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
-        Set<Ability> abilitySet = reader.readSetOfAbilities("Zestaw umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
+        HashSet<Skill> skillSet = reader.readSetOfSkills("Zestaw zdolności: (Format: zdolność1,zdolność2,zdolność3 itp. lub brak)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getSkillsRepository());
+        HashSet<Ability> abilitySet = reader.readSetOfAbilities("Zestaw umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
 
         build = Build.builder()
                 .withHero(hero)

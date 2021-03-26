@@ -1,30 +1,30 @@
 package pl.radomczak.model;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class Wheel {
-    private final HashSet<Ability> abilities = new HashSet<>();
-    private final HashSet<Skill> skills = new HashSet<>();
-    private final HashSet<ItemPosition> itemPositions = new HashSet<>();
-    private final HashSet<Hero> heroes = new HashSet<>();
+    private final LinkedHashSet<Ability> abilities = new LinkedHashSet<>();
+    private final LinkedHashSet<Skill> skills = new LinkedHashSet<>();
+    private final LinkedHashSet<ItemPosition> itemPositions = new LinkedHashSet<>();
+    private final LinkedHashSet<Hero> heroes = new LinkedHashSet<>();
     private final HashMap<String, Build> builds = new HashMap<>();
 
     private Hero activeHero;
-    private HashSet<Item> activeItems;
-    private HashSet<Item> allowedItems;
+    private LinkedHashSet<Item> activeItems;
+    private LinkedHashSet<Item> allowedItems;
 
-    public HashSet<Ability> getAbilities() {
+    public LinkedHashSet<Ability> getAbilities() {
         return abilities;
     }
 
-    public HashSet<Skill> getSkills() {
+    public LinkedHashSet<Skill> getSkills() {
         return skills;
     }
 
-    public HashSet<ItemPosition> getItemPositions() { return itemPositions; }
+    public LinkedHashSet<ItemPosition> getItemPositions() { return itemPositions; }
 
-    public HashSet<Hero> getHeroes() {
+    public LinkedHashSet<Hero> getHeroes() {
         return heroes;
     }
 
@@ -40,19 +40,19 @@ public class Wheel {
         this.activeHero = activeHero;
     }
 
-    public HashSet<Item> getActiveItems() {
+    public LinkedHashSet<Item> getActiveItems() {
         return activeItems;
     }
 
-    public void setActiveItems(HashSet<Item> activeItems) {
+    public void setActiveItems(LinkedHashSet<Item> activeItems) {
         this.activeItems = activeItems;
     }
 
-    public HashSet<Item> getAllowedItems() {
+    public LinkedHashSet<Item> getAllowedItems() {
         return allowedItems;
     }
 
-    public void setAllowedItems(HashSet<Item> allowedItems) {
+    public void setAllowedItems(LinkedHashSet<Item> allowedItems) {
         this.allowedItems = allowedItems;
     }
 }
