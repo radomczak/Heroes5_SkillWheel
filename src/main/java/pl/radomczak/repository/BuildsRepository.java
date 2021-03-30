@@ -1,33 +1,31 @@
 package pl.radomczak.repository;
 
 import pl.radomczak.model.Build;
-
-import java.util.Map;
+import java.util.Collection;
 import java.util.Optional;
 
 public class BuildsRepository {
-    private final Map<String, Build> builds;
+        private final Collection<Build> builds;
 
-    public BuildsRepository(Map<String, Build> builds) {
+    public BuildsRepository(Collection<Build> builds) {
         this.builds = builds;
     }
 
-    public void addBuild(String name, Build build)
+    public void addBuild(Build build)
     {
-        builds.put(name,build);
-    }
-    public void removeBuild(String name)
-    {
-        builds.remove(name);
+        builds.add(build);
     }
 
-    public Map<String, Build> getBuilds() {
+    public Collection<Build> getBuilds()
+    {
         return builds;
     }
 
     public Optional<Build> findByName(String name) {
-        if (builds.containsKey(name))
-            return Optional.of(builds.get(name));
+        for (Build build : builds) {
+            if (build.getName().equals(name))
+                return Optional.of(build);
+        }
         return Optional.empty();
     }
 }

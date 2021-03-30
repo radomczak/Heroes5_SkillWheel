@@ -1,6 +1,5 @@
 package pl.radomczak.model;
 
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 
 public class Wheel {
@@ -8,7 +7,7 @@ public class Wheel {
     private final LinkedHashSet<Skill> skills = new LinkedHashSet<>();
     private final LinkedHashSet<ItemPosition> itemPositions = new LinkedHashSet<>();
     private final LinkedHashSet<Hero> heroes = new LinkedHashSet<>();
-    private final HashMap<String, Build> builds = new HashMap<>();
+    private final LinkedHashSet<Build> builds = new LinkedHashSet<>();
 
     private Hero activeHero;
     private LinkedHashSet<Item> activeItems;
@@ -22,13 +21,15 @@ public class Wheel {
         return skills;
     }
 
-    public LinkedHashSet<ItemPosition> getItemPositions() { return itemPositions; }
+    public LinkedHashSet<ItemPosition> getItemPositions() {
+        return itemPositions;
+    }
 
     public LinkedHashSet<Hero> getHeroes() {
         return heroes;
     }
 
-    public HashMap<String, Build> getBuilds() {
+    public LinkedHashSet<Build> getBuilds() {
         return builds;
     }
 
@@ -36,20 +37,20 @@ public class Wheel {
         return activeHero;
     }
 
-    public void setActiveHero(Hero activeHero) {
-        this.activeHero = activeHero;
-    }
-
     public LinkedHashSet<Item> getActiveItems() {
         return activeItems;
     }
 
-    public void setActiveItems(LinkedHashSet<Item> activeItems) {
-        this.activeItems = activeItems;
-    }
-
     public LinkedHashSet<Item> getAllowedItems() {
         return allowedItems;
+    }
+
+    public void setActiveHero(Hero activeHero) {
+        this.activeHero = activeHero;
+    }
+
+    public void setActiveItems(LinkedHashSet<Item> activeItems) {
+        this.activeItems = activeItems;
     }
 
     public void setAllowedItems(LinkedHashSet<Item> allowedItems) {

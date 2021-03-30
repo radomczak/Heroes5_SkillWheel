@@ -4,14 +4,17 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Build {
+    private String name;
     private Hero hero;
     private Set<Skill> skills;
     private Set<Ability> abilities;
 
-    public Build(Hero hero, Set<Skill> skills, Set<Ability> abilities) {
-        this.hero = hero;
-        this.skills = skills;
-        this.abilities = abilities;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Hero getHero() {
@@ -43,12 +46,22 @@ public class Build {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Build build = (Build) o;
-        return hero.equals(build.hero) && skills.equals(build.skills) && abilities.equals(build.abilities);
+        return name.equals(build.name) && hero.equals(build.hero) && skills.equals(build.skills) && abilities.equals(build.abilities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hero, skills, abilities);
+        return Objects.hash(name, hero, skills, abilities);
+    }
+
+    @Override
+    public String toString() {
+        return "Build{" +
+                "name='" + name + '\'' +
+                ", hero=" + hero +
+                ", skills=" + skills +
+                ", abilities=" + abilities +
+                '}';
     }
 
     public static BuildBuilder builder() {
@@ -56,11 +69,17 @@ public class Build {
     }
 
     public static final class BuildBuilder {
+        private String name;
         private Hero hero;
         private Set<Skill> skills;
         private Set<Ability> abilities;
 
         private BuildBuilder() {
+        }
+
+        public BuildBuilder withName(String name) {
+            this.name = name;
+            return this;
         }
 
         public BuildBuilder withHero(Hero hero) {
@@ -79,7 +98,12 @@ public class Build {
         }
 
         public Build build() {
-            return new Build(hero, skills, abilities);
+            Build build = new Build();
+            build.setName(name);
+            build.setHero(hero);
+            build.setSkills(skills);
+            build.setAbilities(abilities);
+            return build;
         }
     }
 }

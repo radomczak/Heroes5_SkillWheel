@@ -48,8 +48,8 @@ public class WheelControl {
         heroesRepository.addHero(hero);
     }
 
-    public void addBuild(String name,Build build) {
-        buildsRepository.addBuild(name,build);
+    public void addBuild(Build build) {
+        buildsRepository.addBuild(build);
     }
 
     public Wheel getWheel() {

@@ -171,17 +171,18 @@ public class ConsoleUserInterface implements UserInterface {
         HashSet<Ability> abilitySet = reader.readSetOfAbilities("Zestaw umiejętności: (Format: umiejetność1,umiejetność2,umiejetność3 itp.)","Niewłaściwy format danych, spróbuj jeszcze raz", wheelControl.getAbilitiesRepository());
 
         build = Build.builder()
+                .withName(name)
                 .withHero(hero)
                 .withSkills(skillSet)
                 .withAbilities(abilitySet)
                 .build();
 
-        wheelControl.addBuild(name,build);
+        wheelControl.addBuild(build);
     }
 
     private void printBuilds() {
         printer.print("Buildy:");
-        for (String build : wheelControl.getBuildsRepository().getBuilds().keySet()) {
+        for (Build build : wheelControl.getBuildsRepository().getBuilds()) {
             printer.print(build);
         }
     }

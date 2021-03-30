@@ -1,9 +1,6 @@
 package pl.radomczak.controller.io.file;
 
-import pl.radomczak.model.Ability;
-import pl.radomczak.model.Race;
-import pl.radomczak.model.Skill;
-import pl.radomczak.model.Wheel;
+import pl.radomczak.model.*;
 import pl.radomczak.model.exception.DataImportException;
 import pl.radomczak.model.exception.NoSuchRaceException;
 import pl.radomczak.repository.*;
@@ -42,7 +39,7 @@ public class CSVFileManager implements FileManager {
         this.skillsRepository = new SkillsRepository(wheel.getSkills());
     }
 
-    private void importSkills(Wheel wheel) {
+    private void importSkills() {
         String FILE_NAME = "Skills.csv";
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
             bufferedReader.lines()
@@ -82,7 +79,7 @@ public class CSVFileManager implements FileManager {
         return skill;
     }
 
-    private void importAbilities(Wheel wheel) {
+    private void importAbilities() {
         String FILE_NAME = "Abilities.csv";
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
             bufferedReader.lines()
@@ -117,6 +114,83 @@ public class CSVFileManager implements FileManager {
                 .withRequiredAbilities(abilities)
                 .build();
         return ability;
+    }
+
+    private void importHeroes() {
+        String FILE_NAME = "Heroes.csv";
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(this::createHeroFromString)
+                    .forEach(heroesRepository::addHero);
+        } catch (FileNotFoundException e) {
+            throw new DataImportException("Brak pliku " + FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Błąd odczytu pliku " + FILE_NAME);
+        }
+    }
+
+    private Hero createHeroFromString(String csvText) {
+        String[] data = csvText.split(";");
+        Hero hero;
+
+        String name = data[0];
+
+        Skill uniqueSkill = null;
+        Optional<Skill> s = skillsRepository.findByName(data[1]);
+        if (s.isPresent()) uniqueSkill = s.get();
+
+        HashSet<Skill> startingSkills = getSkillsFromString(data[2]);
+        HashSet<Ability> startingAbilities = getAbilitiesFromString(data[3]);
+        Race race;
+
+        try {
+            race = Race.createOptionFromString(data[4]);
+        } catch (NoSuchRaceException ex) {
+            throw new DataImportException(ex.getMessage());
+        }
+
+        hero = Hero.builder()
+                .withName(name)
+                .withUniqueSkill(uniqueSkill)
+                .withStartingSkills(startingSkills)
+                .withStartingAbilities(startingAbilities)
+                .withRace(race)
+                .build();
+        return hero;
+    }
+
+    private void importBuilds() {
+        String FILE_NAME = "Builds.csv";
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(this::createBuildFromString)
+                    .forEach(buildsRepository::addBuild);
+        } catch (FileNotFoundException e) {
+            throw new DataImportException("Brak pliku " + FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Błąd odczytu pliku " + FILE_NAME);
+        }
+    }
+
+    private Build createBuildFromString(String csvText) {
+        String[] data = csvText.split(";");
+        Build build;
+
+        String name = data[0];
+        Hero hero = null;
+        Optional<Hero> h = heroesRepository.findByName(data[1]);
+        if (h.isPresent()) hero = h.get();
+        HashSet<Skill> skillSet = getSkillsFromString(data[2]);
+        HashSet<Ability> abilitySet = getAbilitiesFromString(data[3]);
+
+        build = Build.builder()
+                .withName(name)
+                .withHero(hero)
+                .withSkills(skillSet)
+                .withAbilities(abilitySet)
+                .build();
+
+        return build;
     }
 
     private HashSet<Ability> getAbilitiesFromString(String abilitiesString) {
