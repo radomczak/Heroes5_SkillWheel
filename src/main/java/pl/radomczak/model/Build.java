@@ -3,7 +3,7 @@ package pl.radomczak.model;
 import java.util.Objects;
 import java.util.Set;
 
-public class Build {
+public class Build implements CSVConvertible {
     private String name;
     private Hero hero;
     private Set<Skill> skills;
@@ -66,6 +66,40 @@ public class Build {
 
     public static BuildBuilder builder() {
         return new BuildBuilder();
+    }
+
+    @Override
+    public String toCSV() {
+        StringBuilder builder = new StringBuilder();
+        int index;
+        //Name
+        builder.append(getName());
+        builder.append(";");
+        //Hero
+        builder.append(hero.getName());
+        builder.append(";");
+        //Skills
+        for (Skill skill : skills) {
+            builder.append(skill.getName());
+            builder.append(",");
+        }
+        if (builder.charAt(builder.length()-1) == ',') {
+            index = (builder.length()-1);
+            builder.deleteCharAt(index);
+        }
+        builder.append(";");
+        //Abilities
+        for (Ability ability : abilities) {
+            builder.append(ability.getName());
+            builder.append(",");
+        }
+        if (builder.charAt(builder.length()-1) == ',') {
+            index = (builder.length()-1);
+            builder.deleteCharAt(index);
+        }
+        builder.append(";");
+
+        return builder.toString();
     }
 
     public static final class BuildBuilder {
