@@ -3,7 +3,7 @@ package pl.radomczak.model;
 import java.util.Objects;
 import java.util.Set;
 
-public class Ability extends Item {
+public class Ability extends Item implements CSVConvertible {
     private int proficiencyLevel;
     private boolean racial;
     private final Set<Race> allowedRaces;
@@ -61,6 +61,45 @@ public class Ability extends Item {
 
     public static AbilityBuilder builder() {
         return new AbilityBuilder();
+    }
+
+    @Override
+    public String toCSV() {
+        StringBuilder builder = new StringBuilder();
+        int index;
+        //Name
+        builder.append(getName());
+        builder.append(";");
+        //Description
+        builder.append(getDescription());
+        builder.append(";");
+        //Image path
+        builder.append(getImage());
+        builder.append(";");
+        //Proficiency level
+        builder.append(proficiencyLevel);
+        builder.append(";");
+        //Racial
+        builder.append(racial);
+        builder.append(";");
+        //Races
+        for (Race race : allowedRaces) {
+            builder.append(race);
+            builder.append(",");
+        }
+        if ((index = builder.charAt(builder.length()-1)) == ',')
+            builder.deleteCharAt(index);
+        builder.append(";");
+        //Abilities
+        for (Ability ability : getRequiredAbilities()) {
+            builder.append(ability.getName());
+            builder.append(",");
+        }
+        if ((index = builder.charAt(builder.length()-1)) == ',')
+            builder.deleteCharAt(index);
+        builder.append(";");
+
+        return builder.toString();
     }
 
     public static final class AbilityBuilder {
