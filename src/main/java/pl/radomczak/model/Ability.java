@@ -87,16 +87,20 @@ public class Ability extends Item implements CSVConvertible {
             builder.append(race);
             builder.append(",");
         }
-        if ((index = builder.charAt(builder.length()-1)) == ',')
+        if (builder.charAt(builder.length()-1) == ',') {
+            index = (builder.length()-1);
             builder.deleteCharAt(index);
+        }
         builder.append(";");
         //Abilities
         for (Ability ability : getRequiredAbilities()) {
             builder.append(ability.getName());
             builder.append(",");
         }
-        if ((index = builder.charAt(builder.length()-1)) == ',')
+        if (builder.charAt(builder.length()-1) == ',') {
+            index = (builder.length()-1);
             builder.deleteCharAt(index);
+        }
         builder.append(";");
 
         return builder.toString();
