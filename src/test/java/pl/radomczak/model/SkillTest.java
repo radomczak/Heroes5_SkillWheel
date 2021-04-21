@@ -3,6 +3,7 @@ package pl.radomczak.model;
 import org.junit.*;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
@@ -10,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class SkillTest {
 
     Skill skill;
-    Ability ability;
+    Set<Ability> abilities;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -22,7 +23,9 @@ public class SkillTest {
 
     @Before
     public void setUp() throws Exception {
-        HashSet<Race> races = new HashSet<>();
+        abilities = new HashSet<>();
+        Ability ability;
+        Set<Race> races = new HashSet<>();
         races.add(Race.RYCERZ);
         races.add(Race.LORD_DEMONOW);
 
@@ -35,6 +38,7 @@ public class SkillTest {
                 .withRacial(false)
                 .withRequiredAbilities(new HashSet<>())
                 .build();
+        abilities.add(ability);
     }
 
     @After
@@ -43,9 +47,6 @@ public class SkillTest {
 
     @Test
     public void builderTest() {
-        HashSet<Ability> abilities = new HashSet<>();
-        abilities.add(ability);
-
         skill = Skill.builder()
                 .withName("Skill name")
                 .withDescription("Skill desc")
@@ -59,15 +60,13 @@ public class SkillTest {
         assertEquals("Skill desc",skill.getDescription());
         assertEquals("skill.png",skill.getImage());
         assertNotNull(skill.getRequiredAbilities());
+        assertEquals(abilities,skill.getRequiredAbilities());
         assertEquals(Race.BARBARZYNCA,skill.getRace());
         assertNotNull(skill.getRequiredSkills());
     }
 
     @Test
     public void toCSVTest() {
-        HashSet<Ability> abilities = new HashSet<>();
-        abilities.add(ability);
-
         skill = Skill.builder()
                 .withName("Skill name")
                 .withDescription("Skill desc")

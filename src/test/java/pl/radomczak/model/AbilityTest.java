@@ -3,12 +3,14 @@ package pl.radomczak.model;
 import org.junit.*;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
 public class AbilityTest {
 
     Ability ability;
+    Set<Race> races;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -20,6 +22,8 @@ public class AbilityTest {
 
     @Before
     public void setUp() throws Exception {
+        races = new HashSet<>();
+        races.add(Race.RYCERZ);
     }
 
     @After
@@ -28,10 +32,6 @@ public class AbilityTest {
 
     @Test
     public void builderTest() {
-        HashSet<Race> races = new HashSet<>();
-        races.add(Race.RYCERZ);
-        races.add(Race.LORD_DEMONOW);
-
         ability = Ability.builder()
                 .withName("Test name")
                 .withDescription("description")
@@ -53,10 +53,6 @@ public class AbilityTest {
 
     @Test
     public void toCSVTest() {
-        HashSet<Race> races = new HashSet<>();
-        races.add(Race.RYCERZ);
-        races.add(Race.LORD_DEMONOW);
-
         ability = Ability.builder()
                 .withName("Test name")
                 .withDescription("description")
@@ -67,6 +63,6 @@ public class AbilityTest {
                 .withRequiredAbilities(new HashSet<>())
                 .build();
 
-        assertEquals("Test name;description;Test image;1;false;RYCERZ,LORD_DEMONOW;;",ability.toCSV());
+        assertEquals("Test name;description;Test image;1;false;RYCERZ;;",ability.toCSV());
     }
 }

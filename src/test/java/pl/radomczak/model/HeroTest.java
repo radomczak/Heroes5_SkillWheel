@@ -3,6 +3,7 @@ package pl.radomczak.model;
 import org.junit.*;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
@@ -10,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class HeroTest {
     Hero hero;
     Skill skill;
-    Ability ability;
+    Set<Ability> abilities;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -22,6 +23,8 @@ public class HeroTest {
 
     @Before
     public void setUp() throws Exception {
+        abilities = new HashSet<>();
+        Ability ability;
         HashSet<Race> races = new HashSet<>();
         races.add(Race.RYCERZ);
         races.add(Race.LORD_DEMONOW);
@@ -36,7 +39,6 @@ public class HeroTest {
                 .withRequiredAbilities(new HashSet<>())
                 .build();
 
-        HashSet<Ability> abilities = new HashSet<>();
         abilities.add(ability);
 
         skill = Skill.builder()
@@ -55,9 +57,6 @@ public class HeroTest {
 
     @Test
     public void builderTest() {
-        HashSet<Ability> abilities = new HashSet<>();
-        abilities.add(ability);
-
         hero = Hero.builder()
                 .withName("Clavius Testus Maximus")
                 .withUniqueSkill(skill)
@@ -67,17 +66,16 @@ public class HeroTest {
                 .build();
 
         assertEquals("Clavius Testus Maximus",hero.getName());
-        assertNotNull(skill);
+        assertNotNull(hero.getUniqueSkill());
         assertNotNull(hero.getStartingSkills());
         assertNotNull(hero.getStartingAbilities());
+        assertEquals(skill,hero.getUniqueSkill());
+        assertEquals(abilities,hero.getStartingAbilities());
         assertEquals(Race.RYCERZ,hero.getRace());
     }
 
     @Test
     public void toCSVTest() {
-        HashSet<Ability> abilities = new HashSet<>();
-        abilities.add(ability);
-
         hero = Hero.builder()
                 .withName("Clavius Testus Maximus")
                 .withUniqueSkill(skill)
