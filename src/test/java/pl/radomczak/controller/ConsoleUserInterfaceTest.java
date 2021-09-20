@@ -1,7 +1,7 @@
 package pl.radomczak.controller;
 
 import org.junit.*;
-import pl.radomczak.controller.io.ConsoleUserInterface;
+import pl.radomczak.controller.io.console.ConsoleUserInterface;
 import pl.radomczak.model.*;
 
 

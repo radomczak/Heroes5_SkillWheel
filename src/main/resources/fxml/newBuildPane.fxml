@@ -5,14 +5,13 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.radomczak.controller.io.gui.NewBuildPaneController">
    <children>
       <HBox fx:id="topPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: #635142;">
          <children>
@@ -39,13 +38,9 @@
             <Button fx:id="pic1" layoutX="93.0" layoutY="90.0" mnemonicParsing="false" />
             <Button fx:id="pic2" layoutX="615.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
                <graphic>
-                  <ImageView fx:id="raceAbilityImage41" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../Do%20herosów/skills/Advanced_Blood_Rage.(Texture).png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="raceAbilityImage41" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></Button>
-            <CheckBox layoutX="241.0" layoutY="208.0" mnemonicParsing="false" />
+            <CheckBox fx:id="pic3" layoutX="241.0" layoutY="208.0" mnemonicParsing="false" />
          </children>
       </AnchorPane>
    </children>

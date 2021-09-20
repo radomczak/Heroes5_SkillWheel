@@ -1,4 +1,4 @@
-package pl.radomczak.controller.io;
+package pl.radomczak.controller.io.console;
 
 import pl.radomczak.controller.WheelControl;
 import pl.radomczak.model.*;
@@ -7,7 +7,7 @@ import pl.radomczak.model.exception.NoSuchOptionException;
 import java.util.InputMismatchException;
 import java.util.HashSet;
 
-public class ConsoleUserInterface implements UserInterface {
+public class ConsoleUserInterface {
     private WheelControl wheelControl;
     private final ConsoleReader reader;
     private final ConsolePrinter printer;
@@ -17,7 +17,6 @@ public class ConsoleUserInterface implements UserInterface {
         this.printer = new ConsolePrinter();
     }
 
-    @Override
     public void handle() {
         Option option;
         do {
@@ -207,12 +206,10 @@ public class ConsoleUserInterface implements UserInterface {
         reader.changeInputStreamToString(stream);
     }
 
-    @Override
     public void close() {
         reader.close();
     }
 
-    @Override
     public void applyFor(WheelControl wheelControl) {
         this.wheelControl = wheelControl;
     }

@@ -1,4 +1,4 @@
-package pl.radomczak.controller.io;
+package pl.radomczak.controller.io.console;
 
 import pl.radomczak.model.Option;
 
