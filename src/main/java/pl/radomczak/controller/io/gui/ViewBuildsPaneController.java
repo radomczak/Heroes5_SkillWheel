@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class ViewBuildsPaneController {
+public class ViewBuildsPaneController extends GuiController {
 
     @FXML
     private VBox viewPane;

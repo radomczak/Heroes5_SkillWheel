@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pl.radomczak.controller.WheelControl;
 import pl.radomczak.controller.io.console.ConsoleUserInterface;
+import pl.radomczak.controller.io.gui.StartPaneController;
 
 public class Main extends Application{
     public static void main(String[] args) {
@@ -31,8 +32,8 @@ public class Main extends Application{
         Scene scene = new Scene(loginPane);
         stage.setScene(scene);
         stage.setTitle("SkillWheel by Radosław Popielarski");
-        //StartPaneController controller = loader.getController();
-        //controller.passStageAndWheel(stage,wheelControl);
+        StartPaneController controller = loader.getController();
+        controller.passStageAndWheel(stage,wheelControl);
         stage.show();
     }
 }

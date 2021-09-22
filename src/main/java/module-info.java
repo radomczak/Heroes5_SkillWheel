@@ -4,5 +4,5 @@ module Heroes5.SkillWheel {
     requires javafx.fxml;
 
     exports pl.radomczak.app to javafx.graphics;
-    opens pl.radomczak.controller to javafx.fxml, javafx.base;
+    opens pl.radomczak.controller.io.gui to javafx.fxml, javafx.base;
 }

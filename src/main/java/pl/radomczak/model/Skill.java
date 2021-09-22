@@ -6,11 +6,13 @@ import java.util.Set;
 public class Skill extends Item implements CSVConvertible {
     private Race race;
     private Set<Skill> requiredSkills;
+    private Ability parentAbility;  //First required ability is a parentAbility wich makes this skill dependent on it
 
     public Skill(String name, String description, String image, Set<Ability> requiredAbilities, Race race, Set<Skill> requiredSkills) {
         super(name, description, image, requiredAbilities);
         this.race = race;
         this.requiredSkills = requiredSkills;
+        this.parentAbility = (Ability) requiredAbilities.toArray()[0];
     }
 
     public Race getRace() {
@@ -27,6 +29,14 @@ public class Skill extends Item implements CSVConvertible {
 
     public void setRequiredSkills(Set<Skill> requiredSkills) {
         this.requiredSkills = requiredSkills;
+    }
+
+    public Ability getParentAbility() {
+        return parentAbility;
+    }
+
+    public void setParentAbility(Ability parentAbility) {
+        this.parentAbility = parentAbility;
     }
 
     @Override

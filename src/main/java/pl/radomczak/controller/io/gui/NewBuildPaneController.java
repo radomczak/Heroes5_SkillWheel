@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class NewBuildPaneController {
+public class NewBuildPaneController extends GuiController{
 
     @FXML
     private VBox mainPane;
@@ -62,6 +62,5 @@ public class NewBuildPaneController {
 
     @FXML
     private CheckBox pic3;
-
 }
 
