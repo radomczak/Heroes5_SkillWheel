@@ -4,23 +4,13 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Skill extends Item implements CSVConvertible {
-    private Race race;
     private Set<Skill> requiredSkills;
     private Ability parentAbility;  //First required ability is a parentAbility wich makes this skill dependent on it
 
-    public Skill(String name, String description, String image, Set<Ability> requiredAbilities, Race race, Set<Skill> requiredSkills) {
-        super(name, description, image, requiredAbilities);
-        this.race = race;
+    public Skill(String name, String description, String image, Set<Ability> requiredAbilities, Set<Race> allowedRaces, Set<Skill> requiredSkills) {
+        super(name, description, image, requiredAbilities, allowedRaces);
         this.requiredSkills = requiredSkills;
         this.parentAbility = (Ability) requiredAbilities.toArray()[0];
-    }
-
-    public Race getRace() {
-        return race;
-    }
-
-    public void setRace(Race race) {
-        this.race = race;
     }
 
     public Set<Skill> getRequiredSkills() {
@@ -45,19 +35,19 @@ public class Skill extends Item implements CSVConvertible {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Skill skill = (Skill) o;
-        return race == skill.race && Objects.equals(requiredSkills, skill.requiredSkills);
+        return requiredSkills.equals(skill.requiredSkills) && parentAbility.equals(skill.parentAbility);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), race, requiredSkills);
+        return Objects.hash(super.hashCode(), requiredSkills, parentAbility);
     }
 
     @Override
     public String toString() {
         return "Skill{" +
-                "race=" + race +
-                ", requiredSkills=" + requiredSkills +
+                "requiredSkills=" + requiredSkills +
+                ", parentAbility=" + parentAbility +
                 '}';
     }
 
@@ -89,7 +79,14 @@ public class Skill extends Item implements CSVConvertible {
         }
         builder.append(";");
         //Race
-        builder.append(race);
+        for (Race race : getAllowedRaces()) {
+            builder.append(race.name());
+            builder.append(",");
+        }
+        if (builder.charAt(builder.length()-1) == ',') {
+            index = (builder.length()-1);
+            builder.deleteCharAt(index);
+        }
         builder.append(";");
         //Skills
         for (Skill skill : requiredSkills) {
@@ -105,15 +102,21 @@ public class Skill extends Item implements CSVConvertible {
         return builder.toString();
     }
 
+
     public static final class SkillBuilder {
         private String name;
         private String description;
         private String image;
         private Set<Ability> requiredAbilities;
-        private Race race;
+        private Set<Race> allowedRaces;  //powinno być allowedRaces jako set
         private Set<Skill> requiredSkills;
+        private Ability parentAbility;  //First required ability is a parentAbility wich makes this skill dependent on it
 
         private SkillBuilder() {
+        }
+
+        public static SkillBuilder aSkill() {
+            return new SkillBuilder();
         }
 
         public SkillBuilder withName(String name) {
@@ -136,8 +139,8 @@ public class Skill extends Item implements CSVConvertible {
             return this;
         }
 
-        public SkillBuilder withRace(Race race) {
-            this.race = race;
+        public SkillBuilder withAllowedRaces(Set<Race> allowedRaces) {
+            this.allowedRaces = allowedRaces;
             return this;
         }
 
@@ -146,8 +149,15 @@ public class Skill extends Item implements CSVConvertible {
             return this;
         }
 
+        public SkillBuilder withParentAbility(Ability parentAbility) {
+            this.parentAbility = parentAbility;
+            return this;
+        }
+
         public Skill build() {
-            return new Skill(name, description, image, requiredAbilities, race, requiredSkills);
+            Skill skill = new Skill(name, description, image, requiredAbilities, allowedRaces, requiredSkills);
+            skill.setParentAbility(parentAbility);
+            return skill;
         }
     }
 }

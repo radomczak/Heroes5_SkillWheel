@@ -107,19 +107,13 @@ public class CSVFileManager implements FileManager {
         String name = data[0];
         String description = data[1];
         String image = data[2];
+        HashSet<Race> races = getRacesFromString(data[4]);
 
         HashSet<Ability> requiredAbilities;
         try {
             requiredAbilities = getAbilitiesFromString(data[3]);
         } catch (AbilityNotFoundException e) {
             throw new DataImportException(e.getMessage());
-        }
-
-        Race race;
-        try {
-            race = Race.createOptionFromString(data[4]);
-        } catch (NoSuchRaceException ex) {
-            throw new DataImportException(ex.getMessage());
         }
 
         HashSet<Skill> skills;
@@ -134,7 +128,7 @@ public class CSVFileManager implements FileManager {
                 .withDescription(description)
                 .withImage(image)
                 .withRequiredAbilities(requiredAbilities)
-                .withRace(race)
+                .withAllowedRaces(races)
                 .withRequiredSkills(skills)
                 .build();
         return skill;

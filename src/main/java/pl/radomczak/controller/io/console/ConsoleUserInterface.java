@@ -72,7 +72,7 @@ public class ConsoleUserInterface {
             String name = reader.readSimpleStringField("Nazwa","Niewłaściwa nazwa, spróbuj ponownie");
             String description = reader.readSimpleStringField("Opis","Niewłaściwy opis, spróbuj ponownie");
             String image = reader.readSimpleStringField("Scieżka do obrazu","Niewłaściwa sciezka, spróbuj ponownie");
-            Race race = reader.readRace("Wybierz rase","Niewłaściwa rasa, spróbuj ponownie");
+            HashSet<Race> races = reader.readSetOfRaces("Dla jakich ras jest dostepna? (Format: rasa1,rasa2,rasa3 itp.)");
             HashSet<Skill> skills = null;
 
             boolean needsSkills = reader.readSimpleBooleanField("Czy wymaga innych zdolności? (True / False)","Niewłaściwa odpowiedź spróbuj ponownie");
@@ -87,7 +87,7 @@ public class ConsoleUserInterface {
                 .withDescription(description)
                 .withImage(image)
                 .withRequiredAbilities(abilities)
-                .withRace(race)
+                .withAllowedRaces(races)
                 .withRequiredSkills(skills)
                 .build();
             wheelControl.addSkill(skill);

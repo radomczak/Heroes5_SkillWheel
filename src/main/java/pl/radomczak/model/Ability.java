@@ -6,13 +6,11 @@ import java.util.Set;
 public class Ability extends Item implements CSVConvertible {
     private int proficiencyLevel;
     private boolean racial;
-    private final Set<Race> allowedRaces;
 
     public Ability(String name, String description, String image, int proficiencyLevel, boolean racial,Set<Race> allowedRaces ,Set<Ability> requiredAbilities) {
-        super(name, description, image, requiredAbilities); //requiredAbilities only for advanced abilities that require basic ones.
+        super(name, description, image, requiredAbilities, allowedRaces); //requiredAbilities only for advanced abilities that require basic ones.
         this.proficiencyLevel = proficiencyLevel;
         this.racial = racial;
-        this.allowedRaces = allowedRaces;
     }
 
     public int getProficiencyLevel() {
@@ -31,22 +29,18 @@ public class Ability extends Item implements CSVConvertible {
         this.racial = racial;
     }
 
-    public Set<Race> getAllowedRaces() {
-        return allowedRaces;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Ability ability = (Ability) o;
-        return proficiencyLevel == ability.proficiencyLevel && racial == ability.racial && allowedRaces.equals(ability.allowedRaces);
+        return proficiencyLevel == ability.proficiencyLevel && racial == ability.racial;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), proficiencyLevel, racial, allowedRaces);
+        return Objects.hash(super.hashCode(), proficiencyLevel, racial);
     }
 
     @Override
@@ -54,7 +48,7 @@ public class Ability extends Item implements CSVConvertible {
         String isRacial = "";
         if (racial)
         {
-            isRacial += ("| " + allowedRaces);
+            isRacial += ("| " + getAllowedRaces());
         }
         return "Umiejętność " + getName() +  "| Ścieżka do obrazu - '" + getImage() + "'| Poziom mistrzostwa = " + proficiencyLevel + isRacial + "\n" + getDescription() +"\n";
     }
@@ -83,7 +77,7 @@ public class Ability extends Item implements CSVConvertible {
         builder.append(racial);
         builder.append(";");
         //Races
-        for (Race race : allowedRaces) {
+        for (Race race : getAllowedRaces()) {
             builder.append(race);
             builder.append(",");
         }
@@ -106,16 +100,21 @@ public class Ability extends Item implements CSVConvertible {
         return builder.toString();
     }
 
+
     public static final class AbilityBuilder {
         private int proficiencyLevel;
         private boolean racial;
-        private Set<Race> allowedRaces;
         private String name;
         private String description;
         private String image;
         private Set<Ability> requiredAbilities;
+        private Set<Race> allowedRaces;
 
         private AbilityBuilder() {
+        }
+
+        public static AbilityBuilder anAbility() {
+            return new AbilityBuilder();
         }
 
         public AbilityBuilder withProficiencyLevel(int proficiencyLevel) {
@@ -125,11 +124,6 @@ public class Ability extends Item implements CSVConvertible {
 
         public AbilityBuilder withRacial(boolean racial) {
             this.racial = racial;
-            return this;
-        }
-
-        public AbilityBuilder withAllowedRaces(Set<Race> allowedRaces) {
-            this.allowedRaces = allowedRaces;
             return this;
         }
 
@@ -150,6 +144,11 @@ public class Ability extends Item implements CSVConvertible {
 
         public AbilityBuilder withRequiredAbilities(Set<Ability> requiredAbilities) {
             this.requiredAbilities = requiredAbilities;
+            return this;
+        }
+
+        public AbilityBuilder withAllowedRaces(Set<Race> allowedRaces) {
+            this.allowedRaces = allowedRaces;
             return this;
         }
 

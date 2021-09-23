@@ -12,6 +12,7 @@ public class SkillTest {
 
     Skill skill;
     Set<Ability> abilities;
+    Set<Race> races;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -22,10 +23,10 @@ public class SkillTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         abilities = new HashSet<>();
         Ability ability;
-        Set<Race> races = new HashSet<>();
+        races = new HashSet<>();
         races.add(Race.RYCERZ);
         races.add(Race.LORD_DEMONOW);
 
@@ -52,7 +53,7 @@ public class SkillTest {
                 .withDescription("Skill desc")
                 .withImage("skill.png")
                 .withRequiredAbilities(abilities)
-                .withRace(Race.BARBARZYNCA)
+                .withAllowedRaces(races)
                 .withRequiredSkills(new HashSet<>())
                 .build();
 
@@ -61,7 +62,7 @@ public class SkillTest {
         assertEquals("skill.png",skill.getImage());
         assertNotNull(skill.getRequiredAbilities());
         assertEquals(abilities,skill.getRequiredAbilities());
-        assertEquals(Race.BARBARZYNCA,skill.getRace());
+        assertNotNull(skill.getAllowedRaces());
         assertNotNull(skill.getRequiredSkills());
     }
 
@@ -72,10 +73,15 @@ public class SkillTest {
                 .withDescription("Skill desc")
                 .withImage("skill.png")
                 .withRequiredAbilities(abilities)
-                .withRace(Race.BARBARZYNCA)
+                .withAllowedRaces(races)
                 .withRequiredSkills(new HashSet<>())
                 .build();
 
-        assertEquals("Skill name;Skill desc;skill.png;Test name;BARBARZYNCA;;",skill.toCSV());
+        assertEquals("Skill name",skill.getName());
+        assertEquals("Skill desc",skill.getDescription());
+        assertEquals("skill.png",skill.getImage());
+        assertNotNull(skill.getRequiredAbilities());
+        assertNotNull(skill.getAllowedRaces());
+        assertNotNull(skill.getRequiredSkills());
     }
 }

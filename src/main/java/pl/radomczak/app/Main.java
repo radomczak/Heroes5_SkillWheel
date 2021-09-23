@@ -19,7 +19,6 @@ public class Main extends Application{
         userInterface.applyFor(wheelControl);
         userInterface.handle();
          */
-
         //Graphical mode
         launch(args);
     }

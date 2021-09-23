@@ -50,7 +50,7 @@ public class BuildTest {
                 .withDescription("Skill desc")
                 .withImage("skill.png")
                 .withRequiredAbilities(abilities)
-                .withRace(Race.BARBARZYNCA)
+                .withAllowedRaces(races)
                 .withRequiredSkills(new HashSet<>())
                 .build();
         skills.add(skill);

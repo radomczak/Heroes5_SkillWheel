@@ -143,7 +143,7 @@ public class ConsoleUserInterfaceTest {
             Ability a = ability.get();
             assertEquals(s.getDescription(),"Description");
             assertEquals(s.getImage(),"Image");
-            assertEquals(s.getRace().toString(),"RYCERZ");
+            assertTrue(s.getAllowedRaces().contains(Race.RYCERZ));
             assertNull(s.getRequiredSkills());
             assertTrue(s.getRequiredAbilities().contains(a));
         } else {
